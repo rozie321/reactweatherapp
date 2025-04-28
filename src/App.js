@@ -7,12 +7,9 @@ function App() {
       <header className="App-header">
       <h1>Weather APP</h1>
       <footer>
-        <p>Created by Rozie Manesh source 
-        <a href="https://github.com/rozie321/reactweatherapp"> 
-        github</a>
-        <a href="https://reactweatherapp-roselyn.netlify.app/" > 
-        and netlify 
-        </a>
+        <p>Created by Rozie Manesh source  <a href="https://github.com/rozie321/reactweatherapp"> github </a>
+         and  <a href="https://reactweatherapp-roselyn.netlify.app/" > 
+           netlify </a>
         </p>
         </footer>
       <p>
