@@ -7,10 +7,10 @@ import { useState } from "react";
 
 
 
-export default function Weather() {
+export default function Weather(props) {
     const [ready, setReady] = useState(false);
-   
-    const[temperature, setTemperature] = useState(null);
+    const[weatherData,setWeatherData] = useState({});
+    
     
     function handleResponse(response) {
         console.log(response.data);
@@ -18,8 +18,16 @@ export default function Weather() {
        
        // set the temperature to the current temperature in the response data(fetched from the API)
 
-       setTemperature(response.data.temperature.current);
-      
+       setWeatherData({
+        temperature: response.data.temperature.current, 
+        description: response.data.condition.description,   
+        humidity: response.data.temperature.humidity,
+        wind: response.data.wind.speed,
+        icon: response.data.condition.icon,
+        precipitation: response.data.condition.precipitation,
+        });
+        
+        
         //below boolean state initialized to false, when the data is fetched it is set to true
         // this is to prevent the app from rendering before the data is fetched as well as looping
         // through the data and causing an infinite loop whenever the is a change of state
@@ -48,7 +56,7 @@ export default function Weather() {
             <h1>Lisbon</h1>
             <ul>
                 <li>Wednesday: 07:00</li>
-                <li>Mostly Cloudy</li>
+                <li>{weatherData.icon}</li>
                 
             </ul>
             <div className="row mt-3">
@@ -61,7 +69,7 @@ export default function Weather() {
                         />
                         <div className="float-left">
                             <span className="temperature">
-                                {Math.round(temperature)}
+                                {Math.round(weatherData.temperature)}
                                 </span>  
                             <span className="unit">°C|°F</span>  
                         </div>
@@ -70,9 +78,9 @@ export default function Weather() {
                 </div>
                 <div className="col-6">
                     <ul>
-                            <li>Precipitation: 15%</li>
-                            <li>Humidity: 60%</li>
-                            <li>Wind: 10 km/h</li>
+                            <li>Precipitation:{weatherData.precipitation}</li>
+                            <li>Humidity:{weatherData.humidity}</li>
+                            <li>Wind:{weatherData.wind}</li>
                         </ul>
                 </div>
             </div>
@@ -80,8 +88,8 @@ export default function Weather() {
     )
     else {
         const apiKey="f0edft08a334d1a9c4eb5o0155c624af";
-        let city="Lisbon";
-        let apiUrl=`https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+       
+        let apiUrl=`https://api.shecodes.io/weather/v1/current?query=${props.defaultCity}&key=${apiKey}&units=metric`;
        
         //api call to fetch the data from the API
         // the data is fetched from the API and passed to the handleResponse function
