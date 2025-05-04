@@ -2,8 +2,32 @@ import React from "react";
 import  './Weather.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import axios from "axios";
+import { useState } from "react";
+
+
 
 export default function Weather() {
+    const [ready, setReady] = useState(false);
+   
+    const[temperature, setTemperature] = useState(null);
+    
+    function handleResponse(response) {
+        console.log(response.data);
+       /* alert(`The temperature in ${response.data.city} is ${Math.round(response.data.temperature.current)}°C`); */
+       
+       // set the temperature to the current temperature in the response data(fetched from the API)
+
+       setTemperature(response.data.temperature.current);
+      
+        //below boolean state initialized to false, when the data is fetched it is set to true
+        // this is to prevent the app from rendering before the data is fetched as well as looping
+        // through the data and causing an infinite loop whenever the is a change of state
+        setReady(true);
+    }
+    //initial state of ready which is set to false
+    // this is to prevent the app from rendering before the data is fetched as well as looping
+    if(ready)
     return(
         <div className ="Weather">
             <form>
@@ -23,18 +47,25 @@ export default function Weather() {
             </form>
             <h1>Lisbon</h1>
             <ul>
-                <li>Wednesday: 0700</li>
+                <li>Wednesday: 07:00</li>
                 <li>Mostly Cloudy</li>
                 
             </ul>
-            <div className="row">
+            <div className="row mt-3">
                 <div className="col-6">
-                    <img 
-                    src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png" alt="Weather Icon" />
-                   <span className="temperature">
-                    6
-                    </span>  
-                    <span className="unit">°C|°F</span>   
+                    <div className="clearfix">
+                        <img 
+                        src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png" 
+                        alt="Weather Icon" 
+                        className="float-left"
+                        />
+                        <div className="float-left">
+                            <span className="temperature">
+                                {Math.round(temperature)}
+                                </span>  
+                            <span className="unit">°C|°F</span>  
+                        </div>
+                    </div>
 
                 </div>
                 <div className="col-6">
@@ -47,4 +78,17 @@ export default function Weather() {
             </div>
         </div>
     )
+    else {
+        const apiKey="f0edft08a334d1a9c4eb5o0155c624af";
+        let city="Lisbon";
+        let apiUrl=`https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+       
+        //api call to fetch the data from the API
+        // the data is fetched from the API and passed to the handleResponse function
+        // the data is then set to the state using the setTemperature function
+        axios.get(apiUrl).then(handleResponse);
+
+        return('Loading...');
+        // <div className="Weather">Loading...</div>
+    }
 }
