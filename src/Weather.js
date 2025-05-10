@@ -1,11 +1,11 @@
-import React from "react";
+
 import  './Weather.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import WeatherDetails from "./WeatherDetails";
 import axios from "axios";
 
-import { useState } from "react";
+import React, { useState } from "react";
 
 
 export default function Weather(props) {
@@ -26,7 +26,8 @@ export default function Weather(props) {
         description: response.data.condition.description,   
         humidity: response.data.temperature.humidity,
         wind: response.data.wind.speed,
-       // icon_url: response.data.condition.icon_url,
+       // below is the icon url being fetched from icon description at the end of the url
+       // Hence the baltics so as to replace the icon whenever the API call matches the particular icon description
        iconurl: `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`,
         icon: response.data.condition.icon,
         date: new Date(response.data.time * 1000),
