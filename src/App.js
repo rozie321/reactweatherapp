@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       
-        <Weather defaultCity='Lisbon'/>
+       <Weather defaultCity ="Dublin"/>
         <footer>
           <p>Created by Rozie Manesh source  <a href="https://github.com/rozie321/reactweatherapp"> github </a>
           and  <a href="https://reactweatherapp-roselyn.netlify.app/" > 
