@@ -98,6 +98,5 @@ export default function Weather(props) {
       searchCity();// the searchCity function is called when the form is submitted and handles the data fetched from the API
 
         return('Loading...');
-        <div className="Weather">Loading...</div>
     }
 }
