@@ -44,12 +44,15 @@ export default function WeatherForecast(props) {
                                         <DayForecast data={dailyForecast} />
                                         
                                     </div>
-                                );
+                                )
+                             } else{
+                                    return null;
+                                //return null when the condition if is not met   
                             
                             } 
                         }
                         )}
-                 </div>
+                    </div>
                 
             </div>      
             // the forecast state is set to the daily data in the response data(fetched from the API)   
