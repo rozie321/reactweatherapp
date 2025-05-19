@@ -1,14 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
 export default function WeatherTemperature(props) {
-    const [unit, setUnit] = useState("celsius");// default unit is celsius
-    // the unit is set to celsius by default
-
-
-    function convertToCelsius(event) {// the convertToCelsius function is called when the link C is clicked
-        event.preventDefault();
-        setUnit("celsius");
-    }
+    
+  
     
    
         return (
