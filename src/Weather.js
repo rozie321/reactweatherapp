@@ -3,6 +3,7 @@ import  './Weather.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import WeatherDetails from "./WeatherDetails";
+import WeatherForecast from "./WeatherForecast";
 import axios from "axios";
 
 import React, { useState } from "react";
@@ -22,6 +23,7 @@ export default function Weather(props) {
        // set the temperature to the current temperature in the response data(fetched from the API)
 
        setWeatherData({
+        coordinates: response.data.coordinates,
         temperature: response.data.temperature.current, 
         description: response.data.condition.description,   
         humidity: response.data.temperature.humidity,
@@ -90,6 +92,7 @@ export default function Weather(props) {
             </form>
             
             <WeatherDetails data={weatherData} />
+            <WeatherForecast coordinates={weatherData.coordinates}/>
         </div>
     )
      //above WeatherDetails component is the body of the weather app defining all the api calls being displayed

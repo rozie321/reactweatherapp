@@ -1,0 +1,12 @@
+.WeatherForecast-temperature-max {
+  font-style:bold;
+}
+
+.WeatherForecast-temperature-min {
+opacity:0.8;
+}
+
+.WeatherForecast-img {
+    width: 36px;
+    height: 36px;
+}
